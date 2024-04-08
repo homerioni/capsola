@@ -9,16 +9,25 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function getResult(req, res) {
     let isHaveResult = false;
     while (!isHaveResult) {
+        let respData;
         await axios.post(req.body.url, {id: req.body.id}, {headers: req.body.headers})
             .then((resp) => {
+                respData = resp.data.response;
                 if (resp.data.response !== 'CAPCHA_NOT_READY') {
                     isHaveResult = true;
                     res.send({ success: true, result: resp.data });
                 }
             });
+        if (respData === 'CAPCHA_NOT_READY') {
+            await sleep(2000);
+        }
     }
 }
 
