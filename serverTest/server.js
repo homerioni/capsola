@@ -14,8 +14,10 @@ async function getResult(req, res) {
     while (!isHaveResult) {
         await axios.post(req.body.url, {id: req.body.id}, {headers: req.body.headers})
             .then((resp) => {
-                isHaveResult = resp;
-                res.send({ success: true, result: resp.data });
+                if (resp.data.response !== 'CAPCHA_NOT_READY') {
+                    isHaveResult = true;
+                    res.send({ success: true, result: resp.data });
+                }
             });
     }
 }

@@ -21,7 +21,7 @@
   }
 
   &__title-box {
-    margin-bottom: 6rem;
+    margin-bottom: 2rem;
     text-align: center;
   }
 
@@ -31,8 +31,14 @@
   }
 
   &__sub-title {
+    margin-bottom: 2rem;
     font-weight: 700;
     font-size: 1.8rem;
+    text-align: center;
+
+    &.red {
+      color: #e80000;
+    }
   }
 
   &__form {

@@ -68,15 +68,21 @@ $(document).ready(function () {
         reader.onload = (function () {
             return function (e) {
                 const temp = e.target.result;
-                console.log(e);
 
-                if (_this.attr('name') === 'captchaImg') {
-                    captchaImg = temp.slice(temp.indexOf(',') + 1);
-                    $('#resultFindImg').attr('src', temp);
-                    $('#originalImg').attr('src', temp);
-                } else if (_this.attr('name') === 'iconsImg') {
-                    iconsImg = temp.slice(temp.indexOf(',') + 1);
-                    $('#iconsImg').attr('src', temp);
+                if (file.type === "image/png" && file.size <= 200000) {
+                    if (_this.attr('name') === 'captchaImg') {
+                        captchaImg = temp.slice(temp.indexOf(',') + 1);
+                        $('#resultFindImg').attr('src', temp);
+                        $('#originalImg').attr('src', temp);
+                    } else if (_this.attr('name') === 'iconsImg') {
+                        iconsImg = temp.slice(temp.indexOf(',') + 1);
+                        $('#iconsImg').attr('src', temp);
+                    }
+                } else {
+                    $('.main__sub-title').addClass('red');
+                    uploadLabelReset(_this);
+                    $('.main__form-buttons').removeClass('active');
+                    submitBtn.attr('disabled', 'disabled');
                 }
 
                 _this.siblings('.main__file-img').find('img').attr('src', e.target.result);
@@ -143,17 +149,14 @@ $(document).ready(function () {
     }
 
     async function getResult(taskId) {
-        let isHaveResult = false;
-        while (!isHaveResult) {
-            await fetching({
-                method: 'POST',
-                data: {id: taskId, url: 'https://api.capsola.cloud/result'},
-            }, '/get-result', () => loadingAnim.stop(submitBtn)).then((resp) => {
-                if (resp.result.status === 0) {
-                    $('.main__form-buttons .error-text').html(resp.response).show();
-                    return;
-                }
-                isHaveResult = true;
+        await fetching({
+            method: 'POST',
+            data: {id: taskId, url: 'https://api.capsola.cloud/result'},
+        }, '/get-result', () => loadingAnim.stop(submitBtn)).then((resp) => {
+            if (resp.result.status === 0) {
+                $('.main__form-buttons .error-text').html(resp.result.response).show();
+                loadingAnim.stop(submitBtn);
+            } else {
                 $('#resultList').html('');
                 const coordinates = parseCoordinates(resp.result.response);
                 coordinates.map((item, i) => $('#resultList').append(`<li>${i + 1}: x:${item[0]} y:${item[1]}</li>`));
@@ -167,8 +170,8 @@ $(document).ready(function () {
                 };
                 img.src = $('#resultFindImg').attr('src');
                 resultView();
-            });
-        }
+            }
+        });
     }
 
     $(document).on('submit', '.main__form', function (e) {
@@ -183,6 +186,7 @@ $(document).ready(function () {
 
         loadingAnim.start(submitBtn);
         $('.main__form-buttons .error-text').hide();
+        $('.main__sub-title').removeClass('red');
 
         fetching({
             method: 'POST',
@@ -190,9 +194,11 @@ $(document).ready(function () {
         }, '/send-request', () => loadingAnim.stop(submitBtn))
             .then((resp) => {
                 if (resp.result.status === 0) {
-                    $('.main__form-buttons .error-text').html(resp.response).show();
+                    $('.main__form-buttons .error-text').html(resp.result.response).show();
+                    loadingAnim.stop(submitBtn);
+                } else {
+                    getResult(resp.result.response);
                 }
-                getResult(resp.result.response);
             }).catch((err) => {
                 $('.main__form-buttons .error-text').html(err.message).show();
                 loadingAnim.stop(submitBtn);
