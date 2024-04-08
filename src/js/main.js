@@ -149,6 +149,10 @@ $(document).ready(function () {
                 method: 'POST',
                 data: {id: taskId, url: 'https://api.capsola.cloud/result'},
             }, '/get-result', () => loadingAnim.stop(submitBtn)).then((resp) => {
+                if (resp.result.status === 0) {
+                    $('.main__form-buttons .error-text').html(resp.response).show();
+                    return;
+                }
                 isHaveResult = true;
                 $('#resultList').html('');
                 const coordinates = parseCoordinates(resp.result.response);
@@ -185,6 +189,9 @@ $(document).ready(function () {
             data: requestData,
         }, '/send-request', () => loadingAnim.stop(submitBtn))
             .then((resp) => {
+                if (resp.result.status === 0) {
+                    $('.main__form-buttons .error-text').html(resp.response).show();
+                }
                 getResult(resp.result.response);
             }).catch((err) => {
                 $('.main__form-buttons .error-text').html(err.message).show();
