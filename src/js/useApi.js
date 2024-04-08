@@ -1,15 +1,15 @@
-export const fetching = async (settings, err) => {
+export const fetching = async (settings, url, err) => {
     let resp = '';
     let headers = {
         'Content-Type': 'application/json',
         'X-API-Key': '062634cd-71ba-43be-aaf1-40ff40aace68'
     }
     try {
-        const response = await fetch(settings.url, {
+        const response = await fetch('http://localhost:3050' + url, {
             crossDomain: true,
             method: settings.method || 'POST',
-            body: settings.data && JSON.stringify(settings.data),
-            headers: headers
+            body: settings.data && JSON.stringify({...settings.data, headers}),
+            headers: headers,
         });
         resp = await response.json();
         if (!response.ok) {

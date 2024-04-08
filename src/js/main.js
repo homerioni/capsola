@@ -146,13 +146,12 @@ $(document).ready(function () {
         let isHaveResult = false;
         while (!isHaveResult) {
             await fetching({
-                url: 'https://api.capsola.cloud/result',
                 method: 'POST',
-                data: {id: taskId},
-            }, () => loadingAnim.stop(submitBtn)).then((resp) => {
+                data: {id: taskId, url: 'https://api.capsola.cloud/result'},
+            }, '/get-result', () => loadingAnim.stop(submitBtn)).then((resp) => {
                 isHaveResult = true;
                 $('#resultList').html('');
-                const coordinates = parseCoordinates(resp.response);
+                const coordinates = parseCoordinates(resp.result.response);
                 coordinates.map((item, i) => $('#resultList').append(`<li>${i + 1}: x:${item[0]} y:${item[1]}</li>`));
                 const img = new Image();
                 img.onload = () => {
@@ -172,6 +171,7 @@ $(document).ready(function () {
 
         const requestData = {
             type: 'SmartCaptcha',
+            url: 'https://api.capsola.cloud/create',
             click: captchaImg,
             task: iconsImg,
         };
@@ -180,12 +180,11 @@ $(document).ready(function () {
         $('.main__form-buttons .error-text').hide();
 
         fetching({
-            url: 'https://api.capsola.cloud/create',
             method: 'POST',
             data: requestData,
-        }, () => loadingAnim.stop(submitBtn))
+        }, '/send-request', () => loadingAnim.stop(submitBtn))
             .then((resp) => {
-                getResult(resp.response);
+                getResult(resp.result.response);
             }).catch((err) => {
                 $('.main__form-buttons .error-text').html(err.message).show();
                 loadingAnim.stop(submitBtn);
