@@ -1,0 +1,46 @@
+@mixin btn-hover {
+  transition: box-shadow .2s ease;
+
+  &:hover {
+    box-shadow: 0 0 1rem 1px rgba(0,0,0,0.2) inset;
+  }
+}
+
+.mainBg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 12rem;
+}
+
+.isLoading {
+  position: relative;
+  color: transparent !important;
+
+  > *:not(.isLoading__img) {
+    opacity: 0;
+  }
+
+  @keyframes isLoadingAnim {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .isLoading__img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    max-width: 60%;
+    max-height: 60%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    animation: 1s linear isLoadingAnim infinite;
+  }
+}

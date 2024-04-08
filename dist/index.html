@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="another website">
+    <title>Страница</title>
+
+    <script src="assets/de3d920e5e0de59d9f45.js"></script>
+<script defer src="main.fc4722cabafddb166479.js"></script></head>
+<body>
+
+
+<main class="mainBg">
+    <section class="main">
+        <div class="main__content">
+            <div class="main__title-box">
+                <p class="main__title">Решение антикаптчи</p>
+            </div>
+            <form class="main__form">
+                <label class="main__upload-label">
+                    <input type="file" name="captchaImg">
+                    <span class="main__upload-icon">
+                        <svg><use xlink:href="#upload"></use></svg>
+                    </span>
+                    <span class="main__upload-text uploadEmpty">Загрузить капчу</span>
+                    <span class="main__file-img uploadReady"><img alt=""></span>
+                    <span class="main__file-name uploadReady"></span>
+                    <span class="main__file-size uploadReady"></span>
+                    <button type="button" class="main__file-clear uploadReady"></button>
+                </label>
+                <label class="main__upload-label">
+                    <input type="file" name="iconsImg">
+                    <span class="main__upload-icon">
+                        <svg><use xlink:href="#upload"></use></svg>
+                    </span>
+                    <span class="main__upload-text uploadEmpty">Загрузить иконки</span>
+                    <span class="main__file-img uploadReady"><img src="assets/f54523bf1d5695fb58db.webp" alt=""></span>
+                    <span class="main__file-name uploadReady">Icons.png</span>
+                    <span class="main__file-size uploadReady">23KB</span>
+                    <button type="button" class="main__file-clear uploadReady"></button>
+                </label>
+                <div class="main__form-buttons">
+                    <button type="submit" class="main__form-submit" disabled>
+                        <svg class="icon-active"><use xlink:href="#submit"></use></svg>
+                        <svg class="icon-disable"><use xlink:href="#submitDisable"></use></svg>
+                        <span>распознать</span>
+                    </button>
+                    <button type="button" class="main__form-clear">
+                        <svg><use xlink:href="#reset"></use></svg>
+                        <span>Очистить</span>
+                    </button>
+                    <span class="error-text"></span>
+                </div>
+            </form>
+        </div>
+        <div id="resultContent" class="main__content" style="display: none">
+            <div class="main__title-box">
+                <p class="main__title">Результат решения</p>
+            </div>
+            <div class="main__results">
+                <div class="main__result-item">
+                    <div class="main__result-title">
+                        <span class="main__result-item-number">1</span>
+                        <span class="main__result-item-name">Оригинал</span>
+                    </div>
+                    <div class="main__result-content">
+                        <div class="main__result-img">
+                            <img id="originalImg" src="assets/3b371c510a98aaa8bb71.webp" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="main__result-item">
+                    <div class="main__result-title">
+                        <span class="main__result-item-number">2</span>
+                        <span class="main__result-item-name">Найденные области</span>
+                    </div>
+                    <div class="main__result-content">
+                        <div class="main__result-img" id="resultImgBox">
+                            <img id="resultFindImg" src="assets/f54523bf1d5695fb58db.webp" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="main__result-item">
+                    <div class="main__result-title">
+                        <span class="main__result-item-number">3</span>
+                        <span class="main__result-item-name">Иконки</span>
+                    </div>
+                    <div class="main__result-content">
+                        <div class="main__result-icons">
+                            <img id="iconsImg" src="assets/0325978965c57dd05a13.png" alt="">
+                        </div>
+                        <ul class="main__result-info" id="resultList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="main__new-test-btn">
+                <svg><use xlink:href="#resetGreen"></use></svg>
+                <span>Новый тест</span>
+            </button>
+        </div>
+    </section>
+</main>
+
+
+<svg style="display: none">
+    <symbol id="upload" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.3197 6.49994L11.8797 3.93994L14.4397 6.49994" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11.8798 14.18V4.01001" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.99976 12C3.99976 16.42 6.99976 20 11.9998 20C16.9998 20 19.9998 16.42 19.9998 12" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="submit" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="47" height="47" rx="23.5" fill="#ADB8FF" fill-opacity="0.4"/>
+        <rect x="6" y="6" width="35" height="35" rx="17.5" fill="#ADB8FF"/>
+        <path d="M29.9167 19.0002L20.75 28.1761L18 25.4261" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="reset" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="47" height="47" rx="23.5" fill="#DEE0EC"/>
+        <rect x="6" y="6" width="35" height="35" rx="17.5" fill="#B9BED3"/>
+        <path d="M30.6668 22.9999C30.6668 26.6799 27.6802 29.6666 24.0002 29.6666C20.3202 29.6666 18.0735 25.9599 18.0735 25.9599M18.0735 25.9599H21.0868M18.0735 25.9599V29.2933M17.3335 22.9999C17.3335 19.3199 20.2935 16.3333 24.0002 16.3333C28.4468 16.3333 30.6668 20.0399 30.6668 20.0399M30.6668 20.0399V16.7066M30.6668 20.0399H27.7068" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="resetGreen" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="47" height="47" rx="23.5" fill="#A5DC79"/>
+        <rect x="6" y="6" width="35" height="35" rx="17.5" fill="#BFE99F"/>
+        <path d="M30.6668 22.9999C30.6668 26.6799 27.6802 29.6666 24.0002 29.6666C20.3202 29.6666 18.0735 25.9599 18.0735 25.9599M18.0735 25.9599H21.0868M18.0735 25.9599V29.2933M17.3335 22.9999C17.3335 19.3199 20.2935 16.3333 24.0002 16.3333C28.4468 16.3333 30.6668 20.0399 30.6668 20.0399M30.6668 20.0399V16.7066M30.6668 20.0399H27.7068" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="submitDisable" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="47" height="47" rx="23.5" fill="#B3B8D7" fill-opacity="0.4"/>
+        <rect x="6" y="6" width="35" height="35" rx="17.5" fill="#B3B8D7"/>
+        <path d="M19.748 19.7483L27.7761 27.7764" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19.75 27.7759L27.7781 19.7478" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+</svg>
+
+
+</body>
+</html>
