@@ -5,7 +5,7 @@ export const fetching = async (settings, url, err) => {
         'X-API-Key': '062634cd-71ba-43be-aaf1-40ff40aace68'
     }
     try {
-        const response = await fetch('http://localhost:3050' + url, {
+        const response = await fetch('https://capsola.onrender.com' + url, {
             crossDomain: true,
             method: settings.method || 'POST',
             body: settings.data && JSON.stringify({...settings.data, headers}),
