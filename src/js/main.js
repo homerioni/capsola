@@ -156,6 +156,7 @@ $(document).ready(function () {
                 const img = new Image();
                 img.onload = () => {
                     const scale = $('#resultFindImg').width() / img.width;
+                    $('.main__result-click').remove();
                     coordinates.map((item, i) => {
                         $('#resultImgBox').append(`<div class="main__result-click" style="top: ${item[1] * scale}px; left: ${item[0] * scale}px">${i + 1}</div>`)
                     });
