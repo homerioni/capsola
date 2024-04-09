@@ -157,6 +157,15 @@
     font-size: 1.8rem;
   }
 
+  &__upload-resolution {
+    margin-left: auto;
+    margin-right: 2rem;
+    transform: translateY(1px);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #8998AB;
+  }
+
   &__file-img {
     display: block;
     width: 8rem;
@@ -181,6 +190,14 @@
 
   &__file-size {
     margin-left: .5rem;
+    transform: translateY(1px);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #8998AB;
+  }
+
+  &__file-resolution {
+    margin-left: 1rem;
     transform: translateY(1px);
     font-weight: 700;
     font-size: 1.6rem;

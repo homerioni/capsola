@@ -68,14 +68,20 @@ $(document).ready(function () {
         reader.onload = (function () {
             return function (e) {
                 const temp = e.target.result;
+                const base64Img = temp.slice(temp.indexOf(',') + 1);
+                const img = new Image();
+                img.onload = () => {
+                    _this.siblings('.main__file-resolution').html(img.width + 'x' + img.height + ' px');
+                };
+                img.src = temp;
 
                 if (file.type === "image/png" && file.size <= 200000) {
                     if (_this.attr('name') === 'captchaImg') {
-                        captchaImg = temp.slice(temp.indexOf(',') + 1);
+                        captchaImg = base64Img;
                         $('#resultFindImg').attr('src', temp);
                         $('#originalImg').attr('src', temp);
                     } else if (_this.attr('name') === 'iconsImg') {
-                        iconsImg = temp.slice(temp.indexOf(',') + 1);
+                        iconsImg = base64Img;
                         $('#iconsImg').attr('src', temp);
                     }
                 } else {
